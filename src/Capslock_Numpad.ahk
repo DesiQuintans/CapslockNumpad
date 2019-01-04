@@ -1,9 +1,20 @@
-﻿; Capslock_Numpad
+﻿; CapslockNumpad 1.0.0 (2019-01-04)
+; Desi Quintans
+; https://github.com/DesiQuintans/CapslockNumpad
 
-; https://www.reddit.com/r/AutoHotkey/comments/abyg9b/help_script_for_emulated_numpad_function/
+; An Autohotkey script for Windows that lets you emulate a numeric keypad
+; (numpad) on a keyboard that doesn't have it. Both NumLock modes are usable.
 
-; numpad by Kirby Wu from the Noun Project
-; https://thenounproject.com/search/?q=numpad&i=686166
+; Press Ctrl + CapsLock to toggle the numpad on and off.
+; Press \ (above Enter) to toggle NumLock.
+
+; 789  ->  789
+; uio  ->  456
+; jkl  ->  123
+; 0./  ->  0./
+; *-=  ->  *-+
+
+
 
 ; ======================================
 
