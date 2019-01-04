@@ -6,7 +6,7 @@ An Autohotkey script for Windows that lets you emulate a numeric keypad (numpad)
 
 ## Operation
 
-Download and run `CapslockNumpad.exe`. The executable does not write anything to your computer, and you can put it anywhere.
+Extract `CapslockNumpad.exe`, `numpad_red.ico`, and `numpad_green.ico` to anywhere on your computer. Run `CapslockNumpad.exe`. The executable does not write anything to your computer.
 
 Press `Ctrl + CapsLock` to toggle the numpad on and off. Press `\` (above the `Enter` key) to toggle NumLock.
 
