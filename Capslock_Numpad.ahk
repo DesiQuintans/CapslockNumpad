@@ -1,4 +1,4 @@
-﻿; CapslockNumpad 1.0.0 (2019-01-04)
+﻿; CapslockNumpad 1.1.0 (2019-12-30)
 ; Desi Quintans
 ; https://github.com/DesiQuintans/CapslockNumpad
 
@@ -26,29 +26,39 @@ SetWorkingDir %A_ScriptDir%
 
 ; - Global vars and other setup ------------------------------
 
-Menu, Tray, Icon, numpad_red.ico
 SetNumLockState, On
-numpad_toggle := false
-
+Suspend, On
 
 
 ; - Ctrl + CapsLock toggling ---------------------------------
 
 ^CapsLock::
-    numpad_toggle := !numpad_toggle
-    SoundPlay, *-1
-    if (numpad_toggle == true) {
-        Menu, Tray, Icon, numpad_green.ico
-    } else {
-        Menu, Tray, Icon, numpad_red.ico
-    }
+    Suspend, Toggle
+    SoundPlay, *48
     Return
 
 
 
 ; - Rebinds --------------------------------------------------
 
-#If (numpad_toggle == true && GetKeyState("NumLock", "T") == true)
+;; Common to both numlock states:
+i::Numpad5
+/::NumpadDiv
+=::NumpadAdd
+-::NumpadSub
++8::NumpadMult
+m::Numpad0
+0::Numpad0
+SC034::NumpadDot  ; Period/Greater-Than key
+
+SC02B::           ; Backslash/Pipe
+    Send {NumLock}
+    SoundPlay, *64
+    Return
+
+
+
+#If (GetKeyState("NumLock", "T") == true)
     7::Numpad7
     8::Numpad8
     9::Numpad9
@@ -60,18 +70,8 @@ numpad_toggle := false
     k::Numpad2
     l::Numpad3
 
-    0::Numpad0
-    SC034::NumpadDot  ; Period/Greater-Than key
 
-    ;; Common
-    i::Numpad5
-    /::NumpadDiv
-    =::NumpadAdd
-    -::NumpadSub
-    +8::NumpadMult
-    SC02B::NumLock  ; Backslash/Pipe
-
-#If (numpad_toggle == true && GetKeyState("NumLock", "T") == false)
+#If (GetKeyState("NumLock", "T") == false)
     7::NumpadHome
     8::NumpadUp
     9::NumpadPgUp
@@ -82,14 +82,3 @@ numpad_toggle := false
     j::NumpadEnd
     k::NumpadDown
     l::NumpadPgDn
-
-    0::Numpad0
-    SC034::NumpadDot  ; Period/Greater-Than key
-
-    ;; Common
-    i::Numpad5
-    /::NumpadDiv
-    =::NumpadAdd
-    -::NumpadSub
-    +8::NumpadMult
-    SC02B::NumLock  ; Backslash/Pipe
