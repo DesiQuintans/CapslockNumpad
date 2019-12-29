@@ -29,12 +29,32 @@ SetWorkingDir %A_ScriptDir%
 SetNumLockState, On
 Suspend, On
 
+numlock_on()
+{
+    return GetKeyState("NumLock", "T")
+}
+
+update_traytip()
+{
+    tray_text := "CapsLock Numpad`nToggle with Ctrl + CapsLock"
+
+    if (numlock_on() == true) {
+        numlock_state := "NumLock is ON"
+    } else {
+        numlock_state := "NumLock is OFF"
+    }
+
+    Menu, Tray, Tip, %tray_text%`n`n%numlock_state%
+}
+
+update_traytip()
 
 ; - Ctrl + CapsLock toggling ---------------------------------
 
 ^CapsLock::
     Suspend, Toggle
     SoundPlay, *48
+    update_traytip()
     Return
 
 
@@ -54,11 +74,12 @@ SC034::NumpadDot  ; Period/Greater-Than key
 SC02B::           ; Backslash/Pipe
     Send {NumLock}
     SoundPlay, *64
+    update_traytip()
     Return
 
 
 
-#If (GetKeyState("NumLock", "T") == true)
+#If (numlock_on() == true)
     7::Numpad7
     8::Numpad8
     9::Numpad9
@@ -71,7 +92,7 @@ SC02B::           ; Backslash/Pipe
     l::Numpad3
 
 
-#If (GetKeyState("NumLock", "T") == false)
+#If (numlock_on() == false)
     7::NumpadHome
     8::NumpadUp
     9::NumpadPgUp
